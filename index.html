@@ -1,0 +1,595 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="DiabetesAI Detector — Deteksi risiko diabetes Anda menggunakan teknologi kecerdasan buatan canggih. Cepat, akurat, dan gratis." />
+  <meta name="keywords"
+    content="diabetes, deteksi diabetes, AI kesehatan, kecerdasan buatan, pre-diabetes, analisis kesehatan" />
+  <meta name="author" content="DiabetesAI Detector" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DiabetesAI Detector — Deteksi Risiko Diabetes" />
+  <meta property="og:description"
+    content="Masukkan data kesehatan Anda dan dapatkan prediksi risiko diabetes secara instan menggunakan AI." />
+  <meta property="og:type" content="website" />
+
+  <title>DiabetesAI Detector — Deteksi Risiko Diabetes dengan AI</title>
+
+  <!-- Favicon emoji -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════════════
+       LOADING SCREEN
+       ════════════════════════════════════════════════════════ -->
+  <div id="loading-screen" role="status" aria-live="polite">
+    <div class="loading-logo">
+      <div class="loading-logo-icon">🩺</div>
+      <div class="loading-logo-text">DiabetesAI</div>
+    </div>
+    <p class="loading-subtitle">Memuat dan menginisialisasi model AI untuk analisis kesehatan Anda...</p>
+
+    <div class="progress-container">
+      <div class="progress-track">
+        <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div id="progress-text">Memulai...</div>
+      <div id="status-detail">Harap tunggu sebentar</div>
+    </div>
+
+    <p id="loading-error" class="hidden"></p>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       MAIN APPLICATION SCREEN
+       ════════════════════════════════════════════════════════ -->
+  <div id="app-screen" class="hidden">
+
+    <!-- ── HEADER ─────────────────────────────────────────── -->
+    <header class="site-header" role="banner">
+      <a href="#" class="header-brand" aria-label="DiabetesAI Detector — Halaman Utama">
+        <span class="header-icon" aria-hidden="true">🩺</span>
+        <span class="header-title">DiabetesAI Detector</span>
+      </a>
+      <span id="accuracy-badge" aria-label="Akurasi model">Menghitung...</span>
+    </header>
+
+
+    <!-- ── HERO ───────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-eyebrow">
+        <span aria-hidden="true">🤖</span>
+        Didukung oleh Teknologi AI Canggih
+      </div>
+      <h1 id="hero-heading" class="hero-title">
+        Deteksi Risiko Diabetes<br />Anda Secara Instan
+      </h1>
+      <p class="hero-subtitle">
+        Masukkan data kesehatan Anda di bawah ini. Sistem AI kami akan
+        menganalisis pola kesehatan Anda secara mendalam dan memberikan
+        <strong>prediksi risiko diabetes secara instan</strong>.
+      </p>
+      <div class="hero-stats" role="list" aria-label="Statistik aplikasi">
+        <div class="stat-card" role="listitem">
+          <div class="stat-number">⚡</div>
+          <div class="stat-label">Analisis Instan</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-number">🎯</div>
+          <div class="stat-label">Akurasi Tinggi</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-number">🔬</div>
+          <div class="stat-label">Berbasis Data Medis</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-number">🛡️</div>
+          <div class="stat-label">Privasi Terjaga</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── MAIN CONTENT ───────────────────────────────────── -->
+    <main class="main-content" id="main-form-area">
+
+      <form id="diabetes-form" novalidate aria-label="Form deteksi risiko diabetes">
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 1 — INFORMASI DASAR
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section1-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">👤</div>
+            <div>
+              <div class="section-title" id="section1-title">Informasi Dasar</div>
+              <div class="section-desc">Data demografis dan kondisi umum Anda</div>
+            </div>
+          </div>
+
+          <div class="form-grid form-grid--3">
+
+            <!-- Usia -->
+            <div class="form-group">
+              <label for="age">
+                Usia <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🎂</span>
+                <input type="number" id="age" name="age" placeholder="Contoh: 35" min="1" max="120" step="1" required
+                  aria-describedby="age-hint" />
+                <span class="input-unit">tahun</span>
+              </div>
+              <span class="field-hint" id="age-hint">Masukkan usia Anda saat ini (1–120 tahun)</span>
+            </div>
+
+            <!-- Jenis Kelamin -->
+            <div class="form-group">
+              <label for="gender">
+                Jenis Kelamin <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon">
+                <span class="input-icon" aria-hidden="true">⚧</span>
+                <select id="gender" name="gender" required aria-describedby="gender-hint">
+                  <option value="" disabled selected>— Pilih Jenis Kelamin —</option>
+                  <option value="Male">Laki-laki</option>
+                  <option value="Female">Perempuan</option>
+                  <option value="Other">Lainnya / Prefer not to say</option>
+                </select>
+              </div>
+              <span class="field-hint" id="gender-hint">Pilih jenis kelamin biologis Anda</span>
+            </div>
+
+            <!-- Status Kehamilan (hanya muncul jika Perempuan) -->
+            <div class="form-group" id="pregnant-row">
+              <label>
+                Apakah Sedang Hamil? <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="radio-group" role="radiogroup" aria-label="Status kehamilan">
+                <label class="radio-option">
+                  <input type="radio" id="pregnant-no" name="is_pregnant" value="0" checked />
+                  <span class="radio-label">🚫 Tidak</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" id="pregnant-yes" name="is_pregnant" value="1" />
+                  <span class="radio-label">🤰 Ya</span>
+                </label>
+              </div>
+              <span class="field-hint">Hanya berlaku untuk perempuan</span>
+            </div>
+
+            <!-- Tersembunyi untuk non-female -->
+            <input type="hidden" id="is_pregnant" value="0" />
+
+          </div><!-- /form-grid -->
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 2 — GAYA HIDUP & RIWAYAT KESEHATAN
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section2-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">🏃</div>
+            <div>
+              <div class="section-title" id="section2-title">Gaya Hidup &amp; Riwayat Kesehatan</div>
+              <div class="section-desc">Aktivitas, pola makan, dan riwayat penyakit keluarga</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <!-- Aktivitas Fisik -->
+            <div class="form-group">
+              <label for="physical_activity_minutes_per_week">
+                Waktu Olahraga per Minggu <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🏋️</span>
+                <input type="number" id="physical_activity_minutes_per_week" name="physical_activity_minutes_per_week"
+                  placeholder="Contoh: 150" min="0" max="1440" step="1" required aria-describedby="activity-hint" />
+                <span class="input-unit">menit/minggu</span>
+              </div>
+              <span class="field-hint" id="activity-hint">Total menit olahraga per minggu (0 jika tidak berolahraga)</span>
+            </div>
+
+            <!-- Skor Diet -->
+            <div class="form-group">
+              <label for="diet_score">
+                Skor Kualitas Pola Makan <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon">
+                <span class="input-icon" aria-hidden="true">🥗</span>
+                <input type="number" id="diet_score" name="diet_score" placeholder="Contoh: 6.5" min="1" max="10"
+                  step="0.1" required aria-describedby="diet-hint" />
+              </div>
+              <span class="field-hint" id="diet-hint">Skala 1–10 · 1 = Sangat buruk (banyak junk food) · 10 = Sangat sehat (sayur &amp; buah)</span>
+            </div>
+
+          </div><!-- /form-grid -->
+
+          <!-- Riwayat (binary) -->
+          <div class="form-grid form-grid--3">
+
+            <!-- Riwayat Keluarga -->
+            <div class="form-group">
+              <label>
+                Riwayat Diabetes dalam Keluarga
+                <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="radio-group" role="radiogroup" aria-label="Riwayat diabetes keluarga">
+                <label class="radio-option">
+                  <input type="radio" name="family_history_diabetes" value="0" checked />
+                  <span class="radio-label">✅ Tidak Ada</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="family_history_diabetes" value="1" />
+                  <span class="radio-label">⚠️ Ada</span>
+                </label>
+              </div>
+              <span class="field-hint">Orang tua atau saudara kandung menderita diabetes?</span>
+            </div>
+
+            <!-- Riwayat Hipertensi -->
+            <div class="form-group">
+              <label>
+                Riwayat Hipertensi (Darah Tinggi)
+                <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="radio-group" role="radiogroup" aria-label="Riwayat hipertensi">
+                <label class="radio-option">
+                  <input type="radio" name="hypertension_history" value="0" checked />
+                  <span class="radio-label">✅ Tidak</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="hypertension_history" value="1" />
+                  <span class="radio-label">⚠️ Ya</span>
+                </label>
+              </div>
+              <span class="field-hint">Apakah Anda pernah didiagnosis hipertensi?</span>
+            </div>
+
+            <!-- Riwayat Jantung -->
+            <div class="form-group">
+              <label>
+                Riwayat Penyakit Jantung &amp; Pembuluh Darah
+                <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="radio-group" role="radiogroup" aria-label="Riwayat kardiovaskular">
+                <label class="radio-option">
+                  <input type="radio" name="cardiovascular_history" value="0" checked />
+                  <span class="radio-label">✅ Tidak</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="cardiovascular_history" value="1" />
+                  <span class="radio-label">⚠️ Ya</span>
+                </label>
+              </div>
+              <span class="field-hint">Riwayat serangan jantung, stroke, atau penyakit arteri?</span>
+            </div>
+
+          </div><!-- /form-grid binary -->
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 3 — DATA ANTROPOMETRI
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section3-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">⚖️</div>
+            <div>
+              <div class="section-title" id="section3-title">Data Fisik &amp; Antropometri</div>
+              <div class="section-desc">Ukuran tubuh yang berhubungan dengan risiko diabetes</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <!-- BMI -->
+            <div class="form-group">
+              <label for="bmi">
+                Indeks Massa Tubuh (BMI) <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">⚖️</span>
+                <input type="number" id="bmi" name="bmi" placeholder="Contoh: 24.5" min="10" max="70" step="0.1"
+                  required aria-describedby="bmi-hint" />
+                <span class="input-unit">kg/m²</span>
+              </div>
+              <span class="field-hint" id="bmi-hint">Berat (kg) ÷ Tinggi² (m) · Normal: 18.5–24.9</span>
+            </div>
+
+            <!-- Waist-to-Hip Ratio -->
+            <div class="form-group">
+              <label for="waist_to_hip_ratio">
+                Rasio Lingkar Pinggang–Pinggul <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon">
+                <span class="input-icon" aria-hidden="true">📏</span>
+                <input type="number" id="waist_to_hip_ratio" name="waist_to_hip_ratio" placeholder="Contoh: 0.85"
+                  min="0.5" max="2.0" step="0.01" required aria-describedby="whr-hint" />
+              </div>
+              <span class="field-hint" id="whr-hint">Pinggang (cm) ÷ Pinggul (cm) · Risiko tinggi: &gt;0.9 pria / &gt;0.85 wanita</span>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 4 — TEKANAN DARAH
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section4-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">💓</div>
+            <div>
+              <div class="section-title" id="section4-title">Tekanan Darah</div>
+              <div class="section-desc">Nilai tekanan darah dari hasil pemeriksaan terakhir</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <!-- Sistolik -->
+            <div class="form-group">
+              <label for="systolic_bp">
+                Tekanan Darah Sistolik <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🔺</span>
+                <input type="number" id="systolic_bp" name="systolic_bp" placeholder="Contoh: 120" min="70" max="250"
+                  step="1" required aria-describedby="sys-hint" />
+                <span class="input-unit">mmHg</span>
+              </div>
+              <span class="field-hint" id="sys-hint">Angka atas saat pengukuran · Normal: &lt;120 mmHg</span>
+            </div>
+
+            <!-- Diastolik -->
+            <div class="form-group">
+              <label for="diastolic_bp">
+                Tekanan Darah Diastolik <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🔻</span>
+                <input type="number" id="diastolic_bp" name="diastolic_bp" placeholder="Contoh: 80" min="40" max="160"
+                  step="1" required aria-describedby="dia-hint" />
+                <span class="input-unit">mmHg</span>
+              </div>
+              <span class="field-hint" id="dia-hint">Angka bawah saat pengukuran · Normal: &lt;80 mmHg</span>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 5 — PROFIL LIPID (KOLESTEROL)
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section5-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">🧪</div>
+            <div>
+              <div class="section-title" id="section5-title">Profil Lemak Darah (Kolesterol)</div>
+              <div class="section-desc">Dari hasil pemeriksaan laboratorium darah terakhir</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <!-- Total Kolesterol -->
+            <div class="form-group">
+              <label for="cholesterol_total">
+                Total Kolesterol <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🫀</span>
+                <input type="number" id="cholesterol_total" name="cholesterol_total" placeholder="Contoh: 200" min="50"
+                  max="500" step="1" required aria-describedby="chol-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="chol-hint">Normal: &lt;200 mg/dL</span>
+            </div>
+
+            <!-- HDL Kolesterol -->
+            <div class="form-group">
+              <label for="hdl_cholesterol">
+                Kolesterol HDL <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">✅</span>
+                <input type="number" id="hdl_cholesterol" name="hdl_cholesterol" placeholder="Contoh: 55" min="10"
+                  max="200" step="1" required aria-describedby="hdl-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="hdl-hint">"Kolesterol Baik" — semakin tinggi semakin baik · Normal: &gt;40 (pria) / &gt;50 (wanita)</span>
+            </div>
+
+            <!-- LDL Kolesterol -->
+            <div class="form-group">
+              <label for="ldl_cholesterol">
+                Kolesterol LDL <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">⚠️</span>
+                <input type="number" id="ldl_cholesterol" name="ldl_cholesterol" placeholder="Contoh: 100" min="10"
+                  max="400" step="1" required aria-describedby="ldl-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="ldl-hint">"Kolesterol Jahat" · Normal: &lt;100 mg/dL</span>
+            </div>
+
+            <!-- Trigliserida -->
+            <div class="form-group">
+              <label for="triglycerides">
+                Trigliserida <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🔬</span>
+                <input type="number" id="triglycerides" name="triglycerides" placeholder="Contoh: 150" min="10"
+                  max="1000" step="1" required aria-describedby="trig-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="trig-hint">Kadar lemak dalam darah · Normal: &lt;150 mg/dL</span>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             SEKSI 6 — KADAR GULA DARAH
+             ──────────────────────────────────────────────── -->
+        <section class="form-section" aria-labelledby="section6-title">
+          <div class="section-header">
+            <div class="section-icon" aria-hidden="true">🍬</div>
+            <div>
+              <div class="section-title" id="section6-title">Kadar Gula Darah</div>
+              <div class="section-desc">Hasil pemeriksaan laboratorium gula darah terakhir</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <!-- Gula Darah Puasa -->
+            <div class="form-group">
+              <label for="glucose_fasting">
+                Gula Darah Puasa (GDP) <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🌙</span>
+                <input type="number" id="glucose_fasting" name="glucose_fasting" placeholder="Contoh: 95" min="50"
+                  max="500" step="1" required aria-describedby="gdp-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="gdp-hint">Diukur setelah puasa 8 jam · Normal: &lt;100 · Pre-DM: 100–125 · DM: ≥126</span>
+            </div>
+
+            <!-- Gula Darah 2 Jam PP -->
+            <div class="form-group">
+              <label for="glucose_postprandial">
+                Gula Darah 2 Jam Setelah Makan (GD2JPP) <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🍽️</span>
+                <input type="number" id="glucose_postprandial" name="glucose_postprandial" placeholder="Contoh: 140"
+                  min="50" max="600" step="1" required aria-describedby="gd2jpp-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="gd2jpp-hint">Diukur 2 jam setelah makan · Normal: &lt;140 · Pre-DM: 140–199 · DM: ≥200</span>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ────────────────────────────────────────────────
+             KOTAK ERROR VALIDASI
+             ──────────────────────────────────────────────── -->
+        <div class="validation-box hidden" role="alert" id="validation-box">
+          <div class="validation-box-title">
+            <span aria-hidden="true">❌</span>
+            Mohon perbaiki input berikut:
+          </div>
+          <ul id="validation-errors"></ul>
+        </div>
+
+
+        <!-- ────────────────────────────────────────────────
+             TOMBOL AKSI
+             ──────────────────────────────────────────────── -->
+        <div class="btn-row">
+          <button type="button" id="predict-btn" class="btn btn--primary" onclick="runPrediction()"
+            aria-label="Mulai analisis data dan prediksi diabetes">
+            <span aria-hidden="true">🔍</span>
+            <span>Analisis &amp; Prediksi Sekarang</span>
+            <div id="btn-spinner" class="btn-spinner hidden" aria-hidden="true"></div>
+          </button>
+
+          <button type="button" id="reset-btn" class="btn btn--ghost" onclick="resetForm()"
+            aria-label="Reset semua input form">
+            <span aria-hidden="true">🔄</span>
+            Reset Form
+          </button>
+        </div>
+
+      </form><!-- /form -->
+
+
+      <!-- ────────────────────────────────────────────────────
+           PANEL HASIL PREDIKSI
+           ────────────────────────────────────────────────── -->
+      <div id="result-panel" class="hidden" role="region" aria-live="polite" aria-label="Hasil prediksi diabetes">
+
+        <!-- Header hasil -->
+        <div class="result-header">
+          <div class="result-big-icon" id="result-icon" aria-hidden="true">🩺</div>
+          <div class="result-header-text">
+            <div class="result-label">Hasil Prediksi AI</div>
+            <span id="result-badge">—</span>
+            <p id="result-summary"></p>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="result-tips-section">
+          <div class="result-tips-title">💡 Rekomendasi untuk Anda</div>
+          <ul id="result-tips" aria-label="Rekomendasi kesehatan"></ul>
+        </div>
+
+        <!-- Probability bars -->
+        <div class="proba-section">
+          <div class="proba-title">📊 Distribusi Probabilitas Kelas</div>
+          <div id="proba-bars" role="list" aria-label="Probabilitas setiap kategori diabetes"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p id="result-disclaimer" class="hidden">
+          ⚕️ <strong>Peringatan Medis:</strong> Hasil ini dihasilkan oleh algoritma AI dan bersifat
+          informatif saja. Ini <strong>bukan diagnosis medis</strong>. Selalu konsultasikan dengan
+          dokter atau tenaga kesehatan profesional untuk diagnosis dan penanganan yang tepat.
+        </p>
+
+      </div><!-- /result-panel -->
+
+    </main><!-- /main-content -->
+
+
+    <!-- ── FOOTER ──────────────────────────────────────────── -->
+    <footer class="site-footer" role="contentinfo">
+      <p>
+        🩺 <strong>DiabetesAI Detector</strong> —
+        Sistem Deteksi Risiko Diabetes Berbasis Kecerdasan Buatan
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.72rem;">
+        ⚕️ Aplikasi ini hanya untuk tujuan edukasi dan informasi. Bukan pengganti konsultasi medis profesional.
+      </p>
+    </footer>
+
+  </div><!-- /app-screen -->
+
+
+  <!-- ── TOAST NOTIFICATION ─────────────────────────────────── -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       JAVASCRIPT — urutan load penting
+       ════════════════════════════════════════════════════════ -->
+  <script src="js/decision-tree.js"></script>
+  <script src="js/data-loader.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>

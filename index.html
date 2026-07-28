@@ -200,7 +200,8 @@
                   placeholder="Contoh: 150" min="0" max="1440" step="1" required aria-describedby="activity-hint" />
                 <span class="input-unit">menit/minggu</span>
               </div>
-              <span class="field-hint" id="activity-hint">Total menit olahraga per minggu (0 jika tidak berolahraga)</span>
+              <span class="field-hint" id="activity-hint">Total menit olahraga per minggu (0 jika tidak
+                berolahraga)</span>
             </div>
 
             <!-- Skor Diet -->
@@ -213,7 +214,8 @@
                 <input type="number" id="diet_score" name="diet_score" placeholder="Contoh: 6.5" min="1" max="10"
                   step="0.1" required aria-describedby="diet-hint" />
               </div>
-              <span class="field-hint" id="diet-hint">Skala 1–10 · 1 = Sangat buruk (banyak junk food) · 10 = Sangat sehat (sayur &amp; buah)</span>
+              <span class="field-hint" id="diet-hint">Skala 1–10 · 1 = Sangat buruk (banyak junk food) · 10 = Sangat
+                sehat (sayur &amp; buah)</span>
             </div>
 
           </div><!-- /form-grid -->
@@ -296,34 +298,97 @@
 
           <div class="form-grid">
 
-            <!-- BMI -->
+            <!-- Berat Badan -->
             <div class="form-group">
-              <label for="bmi">
-                Indeks Massa Tubuh (BMI) <span class="required" aria-hidden="true">*</span>
+              <label for="weight_kg">
+                Berat Badan <span class="required" aria-hidden="true">*</span>
               </label>
               <div class="input-wrapper has-icon has-unit">
                 <span class="input-icon" aria-hidden="true">⚖️</span>
-                <input type="number" id="bmi" name="bmi" placeholder="Contoh: 24.5" min="10" max="70" step="0.1"
-                  required aria-describedby="bmi-hint" />
+                <input type="number" id="weight_kg" name="weight_kg" placeholder="Contoh: 65" min="20" max="300"
+                  step="0.1" required aria-describedby="weight-hint" />
+                <span class="input-unit">kg</span>
+              </div>
+              <span class="field-hint" id="weight-hint">Berat badan Anda saat ini</span>
+            </div>
+
+            <!-- Tinggi Badan -->
+            <div class="form-group">
+              <label for="height_cm">
+                Tinggi Badan <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">📐</span>
+                <input type="number" id="height_cm" name="height_cm" placeholder="Contoh: 165" min="100" max="250"
+                  step="0.1" required aria-describedby="height-hint" />
+                <span class="input-unit">cm</span>
+              </div>
+              <span class="field-hint" id="height-hint">Tinggi badan Anda tanpa alas kaki</span>
+            </div>
+
+            <!-- Lingkar Pinggang -->
+            <div class="form-group">
+              <label for="waist_cm">
+                Lingkar Pinggang <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">📏</span>
+                <input type="number" id="waist_cm" name="waist_cm" placeholder="Contoh: 80" min="40" max="200"
+                  step="0.1" required aria-describedby="waist-hint" />
+                <span class="input-unit">cm</span>
+              </div>
+              <span class="field-hint" id="waist-hint">Ukur di bagian pinggang paling sempit (biasanya sejajar
+                pusar)</span>
+            </div>
+
+            <!-- Lingkar Pinggul -->
+            <div class="form-group">
+              <label for="hip_cm">
+                Lingkar Pinggul <span class="required" aria-hidden="true">*</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">📏</span>
+                <input type="number" id="hip_cm" name="hip_cm" placeholder="Contoh: 95" min="40" max="200" step="0.1"
+                  required aria-describedby="hip-hint" />
+                <span class="input-unit">cm</span>
+              </div>
+              <span class="field-hint" id="hip-hint">Ukur di bagian pinggul paling lebar</span>
+            </div>
+
+          </div><!-- /form-grid ukuran mentah -->
+
+          <div class="form-grid" style="margin-top: 1rem;">
+
+            <!-- BMI (dihitung otomatis) -->
+            <div class="form-group">
+              <label for="bmi">
+                Indeks Massa Tubuh (BMI) <span class="badge-auto" aria-hidden="true">🧮 Otomatis</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🧮</span>
+                <input type="number" id="bmi" name="bmi" placeholder="Terisi otomatis" min="10" max="70" step="0.1"
+                  readonly required aria-describedby="bmi-hint" />
                 <span class="input-unit">kg/m²</span>
               </div>
-              <span class="field-hint" id="bmi-hint">Berat (kg) ÷ Tinggi² (m) · Normal: 18.5–24.9</span>
+              <span class="field-hint" id="bmi-hint">Dihitung otomatis: Berat (kg) ÷ Tinggi² (m) · Normal:
+                18.5–24.9</span>
             </div>
 
-            <!-- Waist-to-Hip Ratio -->
+            <!-- Waist-to-Hip Ratio (dihitung otomatis) -->
             <div class="form-group">
               <label for="waist_to_hip_ratio">
-                Rasio Lingkar Pinggang–Pinggul <span class="required" aria-hidden="true">*</span>
+                Rasio Lingkar Pinggang–Pinggul <span class="badge-auto" aria-hidden="true">🧮 Otomatis</span>
               </label>
               <div class="input-wrapper has-icon">
-                <span class="input-icon" aria-hidden="true">📏</span>
-                <input type="number" id="waist_to_hip_ratio" name="waist_to_hip_ratio" placeholder="Contoh: 0.85"
-                  min="0.5" max="2.0" step="0.01" required aria-describedby="whr-hint" />
+                <span class="input-icon" aria-hidden="true">🧮</span>
+                <input type="number" id="waist_to_hip_ratio" name="waist_to_hip_ratio" placeholder="Terisi otomatis"
+                  min="0.5" max="2.0" step="0.01" readonly required aria-describedby="whr-hint" />
               </div>
-              <span class="field-hint" id="whr-hint">Pinggang (cm) ÷ Pinggul (cm) · Risiko tinggi: &gt;0.9 pria / &gt;0.85 wanita</span>
+              <span class="field-hint" id="whr-hint">Dihitung otomatis: Pinggang (cm) ÷ Pinggul (cm) · Risiko tinggi:
+                &gt;0.9 pria / &gt;0.85 wanita</span>
             </div>
 
-          </div>
+          </div><!-- /form-grid hasil otomatis -->
         </section>
 
 
@@ -387,20 +452,6 @@
 
           <div class="form-grid">
 
-            <!-- Total Kolesterol -->
-            <div class="form-group">
-              <label for="cholesterol_total">
-                Total Kolesterol <span class="required" aria-hidden="true">*</span>
-              </label>
-              <div class="input-wrapper has-icon has-unit">
-                <span class="input-icon" aria-hidden="true">🫀</span>
-                <input type="number" id="cholesterol_total" name="cholesterol_total" placeholder="Contoh: 200" min="50"
-                  max="500" step="1" required aria-describedby="chol-hint" />
-                <span class="input-unit">mg/dL</span>
-              </div>
-              <span class="field-hint" id="chol-hint">Normal: &lt;200 mg/dL</span>
-            </div>
-
             <!-- HDL Kolesterol -->
             <div class="form-group">
               <label for="hdl_cholesterol">
@@ -412,7 +463,8 @@
                   max="200" step="1" required aria-describedby="hdl-hint" />
                 <span class="input-unit">mg/dL</span>
               </div>
-              <span class="field-hint" id="hdl-hint">"Kolesterol Baik" — semakin tinggi semakin baik · Normal: &gt;40 (pria) / &gt;50 (wanita)</span>
+              <span class="field-hint" id="hdl-hint">"Kolesterol Baik" — semakin tinggi semakin baik · Normal: &gt;40
+                (pria) / &gt;50 (wanita)</span>
             </div>
 
             <!-- LDL Kolesterol -->
@@ -441,6 +493,26 @@
                 <span class="input-unit">mg/dL</span>
               </div>
               <span class="field-hint" id="trig-hint">Kadar lemak dalam darah · Normal: &lt;150 mg/dL</span>
+            </div>
+
+            <!-- Total Kolesterol (otomatis) -->
+            <div class="form-group">
+              <label for="cholesterol_total">
+                Total Kolesterol <span class="badge-auto" id="total-auto-badge" aria-hidden="true">🧮 Otomatis</span>
+              </label>
+              <div class="input-wrapper has-icon has-unit">
+                <span class="input-icon" aria-hidden="true">🫀</span>
+                <input type="number" id="cholesterol_total" name="cholesterol_total" placeholder="Terisi otomatis"
+                  min="50" max="500" step="1" readonly required aria-describedby="chol-hint" />
+                <span class="input-unit">mg/dL</span>
+              </div>
+              <span class="field-hint" id="chol-hint">Dihitung otomatis (rumus Friedewald): HDL + LDL + (Trigliserida ÷
+                5) · Normal: &lt;200 mg/dL</span>
+              <label for="total-manual-toggle"
+                style="margin-top:0.5rem; display:flex; align-items:flex-start; gap:0.4rem; font-size:0.78rem; cursor:pointer; opacity:0.85;">
+                <input type="checkbox" id="total-manual-toggle" style="margin-top:0.15rem;" />
+                <span>Saya punya angka Total Kolesterol asli dari hasil lab (isi manual, bukan estimasi)</span>
+              </label>
             </div>
 
           </div>
@@ -472,7 +544,8 @@
                   max="500" step="1" required aria-describedby="gdp-hint" />
                 <span class="input-unit">mg/dL</span>
               </div>
-              <span class="field-hint" id="gdp-hint">Diukur setelah puasa 8 jam · Normal: &lt;100 · Pre-DM: 100–125 · DM: ≥126</span>
+              <span class="field-hint" id="gdp-hint">Diukur setelah puasa 8 jam · Normal: &lt;100 · Pre-DM: 100–125 ·
+                DM: ≥126</span>
             </div>
 
             <!-- Gula Darah 2 Jam PP -->
@@ -486,7 +559,8 @@
                   min="50" max="600" step="1" required aria-describedby="gd2jpp-hint" />
                 <span class="input-unit">mg/dL</span>
               </div>
-              <span class="field-hint" id="gd2jpp-hint">Diukur 2 jam setelah makan · Normal: &lt;140 · Pre-DM: 140–199 · DM: ≥200</span>
+              <span class="field-hint" id="gd2jpp-hint">Diukur 2 jam setelah makan · Normal: &lt;140 · Pre-DM: 140–199 ·
+                DM: ≥200</span>
             </div>
 
           </div>

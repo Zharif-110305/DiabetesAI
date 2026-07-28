@@ -13,12 +13,12 @@
 
 const RESULT_CONFIG = {
     'No Diabetes': {
-        icon: '✅',
-        color: '#10b981',
+        icon    : '✅',
+        color   : '#10b981',
         gradient: 'linear-gradient(135deg, #064e3b, #065f46)',
-        badge: 'Tidak Diabetes',
-        summary: 'Kadar gula darah Anda berada dalam batas normal.',
-        tips: [
+        badge   : 'Tidak Diabetes',
+        summary : 'Kadar gula darah Anda berada dalam batas normal.',
+        tips    : [
             'Pertahankan pola makan sehat dan seimbang',
             'Lanjutkan rutinitas olahraga yang teratur',
             'Lakukan pemeriksaan kesehatan tahunan',
@@ -26,12 +26,12 @@ const RESULT_CONFIG = {
         ],
     },
     'Pre-Diabetes': {
-        icon: '⚠️',
-        color: '#f59e0b',
+        icon    : '⚠️',
+        color   : '#f59e0b',
         gradient: 'linear-gradient(135deg, #451a03, #78350f)',
-        badge: 'Pre-Diabetes',
-        summary: 'Kadar gula darah Anda sedikit di atas normal. Perlu perhatian khusus.',
-        tips: [
+        badge   : 'Pre-Diabetes',
+        summary : 'Kadar gula darah Anda sedikit di atas normal. Perlu perhatian khusus.',
+        tips    : [
             'Kurangi konsumsi karbohidrat olahan dan gula',
             'Tingkatkan aktivitas fisik minimal 150 menit/minggu',
             'Turunkan berat badan jika kelebihan berat',
@@ -39,12 +39,12 @@ const RESULT_CONFIG = {
         ],
     },
     'Gestational': {
-        icon: '🤰',
-        color: '#38bdf8',
+        icon    : '🤰',
+        color   : '#38bdf8',
         gradient: 'linear-gradient(135deg, #0c4a6e, #075985)',
-        badge: 'Diabetes Gestasional',
-        summary: 'Kondisi diabetes yang terjadi selama masa kehamilan.',
-        tips: [
+        badge   : 'Diabetes Gestasional',
+        summary : 'Kondisi diabetes yang terjadi selama masa kehamilan.',
+        tips    : [
             'Pantau kadar gula darah secara rutin bersama dokter kandungan',
             'Ikuti diet khusus yang direkomendasikan dokter',
             'Lakukan olahraga ringan yang aman untuk ibu hamil',
@@ -52,12 +52,12 @@ const RESULT_CONFIG = {
         ],
     },
     'Type 1': {
-        icon: '💉',
-        color: '#f97316',
+        icon    : '💉',
+        color   : '#f97316',
         gradient: 'linear-gradient(135deg, #431407, #7c2d12)',
-        badge: 'Diabetes Tipe 1',
-        summary: 'Kondisi autoimun di mana pankreas tidak memproduksi insulin.',
-        tips: [
+        badge   : 'Diabetes Tipe 1',
+        summary : 'Kondisi autoimun di mana pankreas tidak memproduksi insulin.',
+        tips    : [
             'Terapi insulin adalah penanganan utama',
             'Pantau gula darah secara ketat setiap hari',
             'Pelajari cara mengelola hipoglikemia dan hiperglikemia',
@@ -65,12 +65,12 @@ const RESULT_CONFIG = {
         ],
     },
     'Type 2': {
-        icon: '🩺',
-        color: '#ef4444',
+        icon    : '🩺',
+        color   : '#ef4444',
         gradient: 'linear-gradient(135deg, #450a0a, #7f1d1d)',
-        badge: 'Diabetes Tipe 2',
-        summary: 'Kondisi resistensi insulin yang paling umum terjadi.',
-        tips: [
+        badge   : 'Diabetes Tipe 2',
+        summary : 'Kondisi resistensi insulin yang paling umum terjadi.',
+        tips    : [
             'Ubah pola makan: kurangi gula, perbanyak serat',
             'Olahraga teratur dapat meningkatkan sensitivitas insulin',
             'Ikuti pengobatan yang diresepkan dokter',
@@ -83,8 +83,8 @@ const RESULT_CONFIG = {
 // STATE GLOBAL
 // ─────────────────────────────────────────────────────────────
 
-let model = null;
-let modelReady = false;
+let model        = null;
+let modelReady   = false;
 let trainingData = null;
 
 // ─────────────────────────────────────────────────────────────
@@ -103,14 +103,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ─────────────────────────────────────────────────────────────
 
 async function trainModel() {
-    const progressBar = document.getElementById('progress-bar');
-    const progressText = document.getElementById('progress-text');
+    const progressBar   = document.getElementById('progress-bar');
+    const progressText  = document.getElementById('progress-text');
     const loadingScreen = document.getElementById('loading-screen');
-    const appScreen = document.getElementById('app-screen');
-    const statusDetail = document.getElementById('status-detail');
+    const appScreen     = document.getElementById('app-screen');
+    const statusDetail  = document.getElementById('status-detail');
 
     function setProgress(val, text, detail = '') {
-        progressBar.style.width = val + '%';
+        progressBar.style.width  = val + '%';
         progressText.textContent = text;
         if (detail) statusDetail.textContent = detail;
     }
@@ -133,9 +133,9 @@ async function trainModel() {
         await new Promise(resolve => setTimeout(resolve, 80));
 
         model = new DecisionTreeClassifier({
-            maxDepth: 12,
+            maxDepth       : 12,
             minSamplesSplit: 5,
-            minSamplesLeaf: 2,
+            minSamplesLeaf : 2,
         });
 
         // Buat object dataset untuk fit()
@@ -190,19 +190,19 @@ async function trainModel() {
 /** Hitung Total Kolesterol otomatis (rumus Friedewald) dari LDL, HDL & Trigliserida,
  *  dengan opsi override manual jika user punya nilai Total asli dari lab */
 function initLipidCalc() {
-    const hdlEl = document.getElementById('hdl_cholesterol');
-    const ldlEl = document.getElementById('ldl_cholesterol');
-    const trigEl = document.getElementById('triglycerides');
-    const totalEl = document.getElementById('cholesterol_total');
+    const hdlEl    = document.getElementById('hdl_cholesterol');
+    const ldlEl    = document.getElementById('ldl_cholesterol');
+    const trigEl   = document.getElementById('triglycerides');
+    const totalEl  = document.getElementById('cholesterol_total');
     const toggleEl = document.getElementById('total-manual-toggle');
-    const hintEl = document.getElementById('chol-hint');
-    const badgeEl = document.getElementById('total-auto-badge');
+    const hintEl   = document.getElementById('chol-hint');
+    const badgeEl  = document.getElementById('total-auto-badge');
 
     function recalc() {
         if (toggleEl.checked) return; // mode manual — jangan timpa input user
 
-        const hdl = parseFloat(hdlEl.value);
-        const ldl = parseFloat(ldlEl.value);
+        const hdl  = parseFloat(hdlEl.value);
+        const ldl  = parseFloat(ldlEl.value);
         const trig = parseFloat(trigEl.value);
 
         if (!isNaN(hdl) && !isNaN(ldl) && !isNaN(trig)) {
@@ -252,14 +252,14 @@ function initLipidCalc() {
 function initAnthropometryCalc() {
     const weightEl = document.getElementById('weight_kg');
     const heightEl = document.getElementById('height_cm');
-    const waistEl = document.getElementById('waist_cm');
-    const hipEl = document.getElementById('hip_cm');
-    const bmiEl = document.getElementById('bmi');
-    const whrEl = document.getElementById('waist_to_hip_ratio');
+    const waistEl  = document.getElementById('waist_cm');
+    const hipEl    = document.getElementById('hip_cm');
+    const bmiEl    = document.getElementById('bmi');
+    const whrEl    = document.getElementById('waist_to_hip_ratio');
 
     function recalc() {
         // BMI = Berat (kg) ÷ Tinggi² (m)
-        const weight = parseFloat(weightEl.value);
+        const weight   = parseFloat(weightEl.value);
         const heightCm = parseFloat(heightEl.value);
         if (!isNaN(weight) && !isNaN(heightCm) && heightCm > 0) {
             const heightM = heightCm / 100;
@@ -271,7 +271,7 @@ function initAnthropometryCalc() {
 
         // Rasio Pinggang-Pinggul = Pinggang (cm) ÷ Pinggul (cm)
         const waist = parseFloat(waistEl.value);
-        const hip = parseFloat(hipEl.value);
+        const hip   = parseFloat(hipEl.value);
         if (!isNaN(waist) && !isNaN(hip) && hip > 0) {
             const whr = waist / hip;
             whrEl.value = whr.toFixed(2);
@@ -293,7 +293,7 @@ function initAnthropometryCalc() {
 /** Tampilkan/sembunyikan field is_pregnant berdasarkan gender */
 function initGenderConditional() {
     const genderSelect = document.getElementById('gender');
-    const pregnantRow = document.getElementById('pregnant-row');
+    const pregnantRow  = document.getElementById('pregnant-row');
 
     function updatePregnant() {
         const isFemale = genderSelect.value === 'Female';
@@ -350,21 +350,21 @@ function validateForm(data) {
     const errors = [];
 
     const numFields = {
-        age: { label: 'Usia', min: 0, max: 120 },
-        physical_activity_minutes_per_week: { label: 'Waktu Olahraga', min: 0, max: 1440 },
-        diet_score: { label: 'Skor Pola Makan', min: 1, max: 10 },
-        weight_kg: { label: 'Berat Badan', min: 20, max: 300 },
-        height_cm: { label: 'Tinggi Badan', min: 100, max: 250 },
-        waist_cm: { label: 'Lingkar Pinggang', min: 40, max: 200 },
-        hip_cm: { label: 'Lingkar Pinggul', min: 40, max: 200 },
-        systolic_bp: { label: 'Tekanan Darah Sistolik', min: 70, max: 250 },
-        diastolic_bp: { label: 'Tekanan Darah Diastolik', min: 40, max: 160 },
-        cholesterol_total: { label: 'Total Kolesterol', min: 50, max: 500, skipGeneric: true },
-        hdl_cholesterol: { label: 'Kolesterol HDL', min: 10, max: 200 },
-        ldl_cholesterol: { label: 'Kolesterol LDL', min: 10, max: 400 },
-        triglycerides: { label: 'Trigliserida', min: 10, max: 1000 },
-        glucose_fasting: { label: 'Gula Darah Puasa', min: 50, max: 500 },
-        glucose_postprandial: { label: 'Gula Darah 2 Jam PP', min: 50, max: 600 },
+        age                                : { label: 'Usia', min: 0, max: 120 },
+        physical_activity_minutes_per_week : { label: 'Waktu Olahraga', min: 0, max: 1440 },
+        diet_score                         : { label: 'Skor Pola Makan', min: 1, max: 10 },
+        weight_kg                          : { label: 'Berat Badan', min: 20, max: 300 },
+        height_cm                          : { label: 'Tinggi Badan', min: 100, max: 250 },
+        waist_cm                           : { label: 'Lingkar Pinggang', min: 40, max: 200 },
+        hip_cm                             : { label: 'Lingkar Pinggul', min: 40, max: 200 },
+        systolic_bp                        : { label: 'Tekanan Darah Sistolik', min: 70, max: 250 },
+        diastolic_bp                       : { label: 'Tekanan Darah Diastolik', min: 40, max: 160 },
+        cholesterol_total                  : { label: 'Total Kolesterol', min: 50, max: 500, skipGeneric: true },
+        hdl_cholesterol                    : { label: 'Kolesterol HDL', min: 10, max: 200 },
+        ldl_cholesterol                    : { label: 'Kolesterol LDL', min: 10, max: 400 },
+        triglycerides                      : { label: 'Trigliserida', min: 10, max: 1000 },
+        glucose_fasting                    : { label: 'Gula Darah Puasa', min: 50, max: 500 },
+        glucose_postprandial               : { label: 'Gula Darah 2 Jam PP', min: 50, max: 600 },
     };
 
     // BMI & Rasio Pinggang-Pinggul dihitung otomatis — validasi terpisah agar
@@ -418,7 +418,7 @@ async function runPrediction() {
     }
 
     const formData = collectFormData();
-    const errors = validateForm(formData);
+    const errors   = validateForm(formData);
 
     if (errors.length > 0) {
         showValidationErrors(errors);
@@ -427,17 +427,17 @@ async function runPrediction() {
 
     clearValidationErrors();
 
-    const btn = document.getElementById('predict-btn');
+    const btn     = document.getElementById('predict-btn');
     const spinner = document.getElementById('btn-spinner');
-    btn.disabled = true;
+    btn.disabled  = true;
     spinner.classList.remove('hidden');
 
     await new Promise(r => setTimeout(r, 300)); // Visual feedback
 
     try {
-        const sample = encodeUserInput(formData);
-        const result = model.predict(sample);
-        const proba = model.predictProba(sample);
+        const sample  = encodeUserInput(formData);
+        const result  = model.predict(sample);
+        const proba   = model.predictProba(sample);
 
         displayResult(result, proba, formData);
     } catch (err) {
@@ -454,15 +454,15 @@ async function runPrediction() {
 // ─────────────────────────────────────────────────────────────
 
 function displayResult(prediction, proba, formData) {
-    const cfg = RESULT_CONFIG[prediction];
+    const cfg        = RESULT_CONFIG[prediction];
     const resultPanel = document.getElementById('result-panel');
 
     // Header
-    document.getElementById('result-icon').textContent = cfg.icon;
-    document.getElementById('result-badge').textContent = cfg.badge;
-    document.getElementById('result-badge').style.background = cfg.color;
-    document.getElementById('result-summary').textContent = cfg.summary;
-    resultPanel.style.background = cfg.gradient;
+    document.getElementById('result-icon').textContent        = cfg.icon;
+    document.getElementById('result-badge').textContent       = cfg.badge;
+    document.getElementById('result-badge').style.background  = cfg.color;
+    document.getElementById('result-summary').textContent     = cfg.summary;
+    resultPanel.style.background                              = cfg.gradient;
 
     // Tips
     const tipsList = document.getElementById('result-tips');
@@ -476,9 +476,9 @@ function displayResult(prediction, proba, formData) {
 
     const sortedProba = Object.entries(proba).sort((a, b) => b[1] - a[1]);
     for (const [cls, prob] of sortedProba) {
-        const pct = (prob * 100).toFixed(1);
-        const clsCfg = RESULT_CONFIG[cls];
-        const isMain = cls === prediction;
+        const pct     = (prob * 100).toFixed(1);
+        const clsCfg  = RESULT_CONFIG[cls];
+        const isMain  = cls === prediction;
 
         probaContainer.innerHTML += `
         <div class="proba-row ${isMain ? 'proba-row--active' : ''}">
@@ -520,7 +520,7 @@ function displayResult(prediction, proba, formData) {
 
 function showValidationErrors(errors) {
     const container = document.getElementById('validation-errors');
-    const box = document.getElementById('validation-box');
+    const box       = document.getElementById('validation-box');
     container.innerHTML = errors.map(e => `<li>${e}</li>`).join('');
     box.classList.remove('hidden');
     box.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -528,9 +528,9 @@ function showValidationErrors(errors) {
 
 function clearValidationErrors() {
     const container = document.getElementById('validation-errors');
-    const box = document.getElementById('validation-box');
+    const box       = document.getElementById('validation-box');
     if (container) container.innerHTML = '';
-    if (box) box.classList.add('hidden');
+    if (box)       box.classList.add('hidden');
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -553,8 +553,8 @@ function resetForm() {
 // ─────────────────────────────────────────────────────────────
 
 function showToast(message, type = 'info') {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = `toast toast--${type} toast--show`;
+    const toast    = document.getElementById('toast');
+    toast.textContent   = message;
+    toast.className     = `toast toast--${type} toast--show`;
     setTimeout(() => toast.classList.remove('toast--show'), 3500);
 }
